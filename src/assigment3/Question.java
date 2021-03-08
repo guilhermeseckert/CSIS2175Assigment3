@@ -19,7 +19,6 @@ public abstract class  Question {
         this.qText = qText;
     }
 
-
     public Double getPoint() {
         return point;
     }

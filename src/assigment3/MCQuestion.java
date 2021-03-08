@@ -9,34 +9,31 @@ public class MCQuestion extends Question {
     public MCQuestion() {
     }
 
-    @Override
-    public Double grade(String answer) {
-        return null;
-    }
-
-    @Override
-    public String getCorrectAnswer() {
-        return null;
-    }
-
-    @Override
-    public String getStringAnswer() {
-        return null;
-    }
-
     public MCQuestion(String qText, String options, double point) {
-        this.options.add(options);
-          this.answer = answer;
+          this.options.add(options);
+          super.setqText(qText);
+          super.setPoint(point);
+
     }
+
 
     public ArrayList<String> getOptions() {
 
-        return options;
+         ArrayList<String> temp = new ArrayList<String>();
+
+        for (int i = 0; i < options.size(); i++) {
+            String apt = options.get(i);
+            String[] opt = apt.split("##");
+            for(int j =0 ; j < opt.length; j ++) {
+                temp.add(opt[j].replace("*", ""));
+            }
+        }
+
+
+        return temp;
+
     }
 
-    public void setOptions(ArrayList<String> options){
-
-    }
 
     public void setOptions(String options) {
         this.options.add(options);
@@ -51,8 +48,42 @@ public class MCQuestion extends Question {
         this.answer = answer;
     }
 
+    @Override
+    public Double grade(String answer) {
+        if (!answer.equals(answer)) {
+            return super.getPoint();
+        }
+        else {
+            return 0.0;
+        }
+    }
 
+    @Override
+    public String getCorrectAnswer() {
 
+        for (int i = 0; i < options.size(); i++) {
+            String apt = options.get(i);
+
+            String[] opt = apt.split("##");
+
+            for (int j = 0; j < opt.length; j++) {
+
+                if (opt[j].indexOf("*") == 0) {
+                    this.answer = (opt[j].replace("*", ""));
+                    return this.answer;
+
+                }
+
+            }
+
+        }
+        return null;
+    }
+
+    @Override
+    public String getStringAnswer() {
+        return String.join("##", this.options);
+    }
 
 
 }

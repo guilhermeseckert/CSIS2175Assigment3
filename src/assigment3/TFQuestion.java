@@ -8,6 +8,7 @@ public class TFQuestion extends Question {
 
     }
 
+
     public TFQuestion(String qText, boolean answer, double point) {
         this.answer = answer;
         super.setqText(qText);
@@ -25,7 +26,9 @@ public class TFQuestion extends Question {
 
     @Override
     public Double grade(String answer) {
-        return null;
+        if (Boolean.parseBoolean(answer) == this.answer) return super.getPoint();
+
+        return 0.0;
     }
 
     @Override
