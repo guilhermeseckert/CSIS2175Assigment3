@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Asgn03 {
     public static String db = "jdbc:ucanaccess:///Users/guilhermesonnemann/Desktop/JavaProjects/assigment3/src/Question.accdb";
-    private static Double Score;
+    private static Double Score = 0.0;
 
     public static void main(String[] args) {
 
@@ -234,7 +234,8 @@ public class Asgn03 {
                          System.out.println("wrong option");
                          break;
                  }
-//                 Score += question.grade(answer);
+                 Score += question.grade(answer);
+                 System.out.println("grade " +   Score);
 
 
              } else  {
@@ -260,7 +261,9 @@ public class Asgn03 {
                      break;
                  }
 
-//                 Score += question.grade(answer);
+                 Score += question.grade(answer);
+                 System.out.println("grade " +   Score);
+
 
 
 

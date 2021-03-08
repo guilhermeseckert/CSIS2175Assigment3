@@ -48,14 +48,15 @@ public class MCQuestion extends Question {
         this.answer = answer;
     }
 
+
     @Override
     public Double grade(String answer) {
-        if (!answer.equals(answer)) {
+        if (answer.equals(this.answer)) {
             return super.getPoint();
-        }
-        else {
+        }  else {
             return 0.0;
         }
+
     }
 
     @Override
