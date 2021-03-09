@@ -9,10 +9,7 @@ public class Asgn03 {
 
     public static void main(String[] args) {
 
-
-
         Scanner obj = new Scanner(System.in);
-
 
         try {
             Connection con = DriverManager.getConnection(db);
@@ -50,7 +47,7 @@ public class Asgn03 {
     }
 
 
-    public static ArrayList NumberOFOption(int numberOfOptions) {
+    public static ArrayList<String> NumberOFOption(int numberOfOptions) {
         Scanner obj = new Scanner(System.in);
         ArrayList<String> options = new ArrayList<String>();
         boolean doagain = false;
@@ -87,26 +84,27 @@ public class Asgn03 {
         Question question;
         String options;
         double NumberOfPoints;
-        String questionDescription = "";
+        String questionDescription;
         System.out.println("Enter the type of question (MC or TF) >>");
-        String type = obj.next() ;
+        String type = obj.nextLine() ;
 
         if(type.equalsIgnoreCase("mc")) {
 
             System.out.println("Enter the question text >>");
-            questionDescription = obj.next();
+            questionDescription  = obj.nextLine();
+
             System.out.println("How many options?>>");
             int numberOfOptions = obj.nextInt();
-            options = String.join("##", NumberOFOption(numberOfOptions));
+            options = String.join("##",
+                    NumberOFOption(numberOfOptions));
             System.out.println("How many points?");
             NumberOfPoints = obj.nextDouble();
-
             question = new MCQuestion(questionDescription, options, NumberOfPoints);
 
         } else if (type.equalsIgnoreCase("tf")) {
 
             System.out.println("Enter the question text");
-            questionDescription = obj.next();
+            questionDescription = obj.nextLine();
             System.out.println("Answer is True or False?");
             Boolean answer = obj.nextBoolean();
             System.out.println("How many points?");
@@ -182,14 +180,14 @@ public class Asgn03 {
                      System.out.println((char)('A' + x) +": " + question.getOptions().get(x));
 
                  }
-                 System.out.println(question.getCorrectAnswer());
-
+                 int correct = -50;
                  System.out.println("Enter your choice >> ");
                  answer = obj.next().toLowerCase(Locale.ROOT);
                  switch (answer) {
                      case "a":
                          if (question.getOptions().get(0).equals(question.getCorrectAnswer())) {
                              System.out.println("You are correct!");
+                             correct = 0;
 
                          } else {
                              System.out.println("You are wrong. The correct answer is " + question.getCorrectAnswer());
@@ -199,7 +197,7 @@ public class Asgn03 {
                      case "b":
                          if (question.getOptions().get(1).equals(question.getCorrectAnswer())) {
                              System.out.println("You are correct!");
-
+                             correct = 1;
                          } else {
                              System.out.println("You are wrong. The correct answer is " + question.getCorrectAnswer());
                          }
@@ -208,7 +206,7 @@ public class Asgn03 {
                      case "c":
                          if (question.getOptions().get(2).equals(question.getCorrectAnswer())) {
                              System.out.println("You are correct!");
-
+                             correct = 2;
                          } else {
                              System.out.println("You are wrong. The correct answer is " + question.getCorrectAnswer());
                          }
@@ -216,7 +214,7 @@ public class Asgn03 {
                      case "d":
                          if (question.getOptions().get(3).equals(question.getCorrectAnswer())) {
                              System.out.println("You are correct!");
-
+                             correct = 3;
                          } else {
                              System.out.println("You are wrong. The correct answer is " + question.getCorrectAnswer());
                          }
@@ -224,7 +222,7 @@ public class Asgn03 {
                      case "e":
                          if (question.getOptions().get(4).equals(question.getCorrectAnswer())) {
                              System.out.println("You are correct!");
-
+                             correct = 4;
                          } else {
                              System.out.println("You are wrong. The correct answer is " + question.getCorrectAnswer());
                          }
@@ -234,8 +232,10 @@ public class Asgn03 {
                          System.out.println("wrong option");
                          break;
                  }
-                 Score += question.grade(answer);
-                 System.out.println("grade " +   Score);
+                 if (correct != -50) {
+                     Score += question.grade(question.getOptions().get(correct));
+                 }
+
 
 
              } else  {
@@ -247,7 +247,7 @@ public class Asgn03 {
 
                  System.out.println(question.getqText());
                  System.out.println("True(T) or False(F)");
-                 answer = obj.nextLine().toLowerCase(Locale.ROOT);
+                 answer = obj.next().toLowerCase(Locale.ROOT);
 
                  switch (answer) {
                      case "t":
@@ -261,10 +261,8 @@ public class Asgn03 {
                      break;
                  }
 
+
                  Score += question.grade(answer);
-                 System.out.println("grade " +   Score);
-
-
 
 
              }
@@ -277,11 +275,10 @@ public class Asgn03 {
 
      }
 
+        System.out.println("The quiz ends. Your score is " +   Score);
 
 
     }
-
-
 
 
 }

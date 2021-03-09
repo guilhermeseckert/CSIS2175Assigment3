@@ -51,7 +51,7 @@ public class MCQuestion extends Question {
 
     @Override
     public Double grade(String answer) {
-        if (answer.equals(this.answer)) {
+        if (answer.equals(getAnswer())) {
             return super.getPoint();
         }  else {
             return 0.0;
@@ -71,6 +71,7 @@ public class MCQuestion extends Question {
 
                 if (opt[j].indexOf("*") == 0) {
                     this.answer = (opt[j].replace("*", ""));
+                    setAnswer(this.answer);
                     return this.answer;
 
                 }
