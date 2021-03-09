@@ -26,7 +26,9 @@ public class TFQuestion extends Question {
 
     @Override
     public Double grade(String answer) {
-        if (Boolean.parseBoolean(answer) == this.answer) return super.getPoint();
+        if (Boolean.parseBoolean(answer) == this.answer) {
+            return super.getPoint();
+        }
 
         return 0.0;
     }
